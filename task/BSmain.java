@@ -20,15 +20,15 @@ public class BSmain {
     book2.displayBooks(2);
     book3.displayBooks(3);
 
-    PlaceOrder order = new PlaceOrder("John Doe", "Laskar Pelangi", 2, 50000);
+    PlaceOrder order = new PlaceOrder("Betty", "Laskar Pelangi", 2, 50000);
     order.displayOrderDetails();
 
     System.out.println("\n----- Invoice Details -----");
-    Invoice invoice = new Invoice("John Doe", "Laskar Pelangi", 2, 50000);
+    Invoice invoice = new Invoice("Betty", "Laskar Pelangi", 2, 50000);
     invoice.displayOrderDetails();
 
     System.out.println("\n----- Payment Details -----");
-    Payment payment = new Payment("John Doe", "Laskar Pelangi", 2, 50000, "Virtual Account");
+    Payment payment = new Payment("Betty", "Laskar Pelangi", 2, 50000, "Virtual Account");
     payment.displayOrderDetails();
     
   }

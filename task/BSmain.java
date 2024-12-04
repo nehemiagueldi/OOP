@@ -1,5 +1,6 @@
 package task;
 
+import task.utils.DiscountUtils;
 import task.utils.PlaceOrderUtils;
 
 public class BSmain {
@@ -31,7 +32,7 @@ public class BSmain {
     System.out.println("--------------------------------------------------------------------------------------------------------");
     System.out.printf("%-4s %-17s %-15s %-12s %-15s %-18s %-15s\n", "No", "Book Name", "Price", "Quantity", "Total Price", "Invoice Created", "Invoice Expired");
     System.out.println("--------------------------------------------------------------------------------------------------------");
-    invoice1.displayInvoiceDetails(1, invoice1.bookName, invoice1.quantity, invoice1.priceBook, invoice1.calculateTotalPrice(), invoice1.invoiceDateCreated, invoice1.invoiceDateExpired);;
+    invoice1.displayInvoiceDetails(1, invoice1.bookName, invoice1.quantity, invoice1.priceBook, invoice1.calculateTotalPrice(), invoice1.invoiceDateCreated, invoice1.invoiceDateExpired);
     invoice2.displayInvoiceDetails(2, invoice2.bookName, invoice2.quantity, invoice2.priceBook, invoice2.calculateTotalPrice(), invoice2.invoiceDateCreated, invoice2.invoiceDateExpired);
 
     Payment payment = new Payment();
@@ -41,8 +42,8 @@ public class BSmain {
     System.out.println("-----------------------------------------------------------------------------------------------------------------------");
     System.out.printf("%-4s %-17s %-15s %-12s %-15s %-18s %-15s %-15s\n", "No", "Book Name", "Price", "Quantity", "Total Price", "Discount", "Final Price", "Payment Method");
     System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-    payment1.displayPaymentDetails(1);
-    payment2.displayPaymentDetails(2);
+    payment1.displayPaymentDetails(1, payment1.bookName, payment1.quantity, payment1.priceBook, payment1.calculateTotalPrice(), payment1.paymentMethod, payment1.discPerc, DiscountUtils.calculateDiscount(payment1.calculateTotalPrice(), payment1.discPerc));
+    payment2.displayPaymentDetails(2, payment2.bookName, payment2.quantity, payment2.priceBook, payment2.calculateTotalPrice(), payment2.paymentMethod, payment2.discPerc, DiscountUtils.calculateDiscount(payment2.calculateTotalPrice(), payment2.discPerc));
 
     int totalBooksPurchasedPrice = payment.calculateTotalPrice(payment1.calculateTotalPrice(), payment2.calculateTotalPrice());
     int grandTotalPrice = payment.calculateTotalPrice(totalBooksPurchasedPrice);

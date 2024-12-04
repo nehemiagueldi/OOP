@@ -44,9 +44,9 @@ public class Payment extends PlaceOrder implements PaymentInterface{
     System.out.println("Grand Total Price After Discount: " + formatCurrency(grandTotalPrice));
   }
   
-  public void displayPaymentDetails(int no) {
-    int totalPrice = calculateTotalPrice();
-    int finalPrice = DiscountUtils.calculateDiscount(totalPrice, discPerc);
-    super.displayPaymentDetails(no, bookName, quantity, priceBook, totalPrice, paymentMethod, discPerc, finalPrice);
-  }
+  // public void displayPaymentDetails(int no) {
+  //   int totalPrice = calculateTotalPrice();
+  //   int finalPrice = DiscountUtils.calculateDiscount(totalPrice, discPerc);
+  //   super.displayPaymentDetails(no, bookName, quantity, priceBook, totalPrice, paymentMethod, discPerc, finalPrice);
+  // }
 }

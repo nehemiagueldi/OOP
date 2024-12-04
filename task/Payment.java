@@ -1,34 +1,52 @@
 package task;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-import task.interfc.Discount;
+import task.interfc.PaymentInterface;
+import task.utils.DiscountUtils;
 
-public class Payment extends PlaceOrder implements Discount{
-  private String paymentMethod;
-  private final int discPerc = 10;
+public class Payment extends PlaceOrder implements PaymentInterface{
+  String bookName;
+  int quantity;
+  int priceBook;
+  String paymentMethod;
+  final int discPerc = 10;
 
-  public Payment(String customerName, String bookName, int quantity, int priceBook, String paymentMethod) {
-    super(customerName, bookName, quantity, priceBook);
+  public Payment() {
+    super();
+  }
+
+  public Payment(String paymentId, String bookName, int quantity, int priceBook, String paymentMethod) {
+    super(paymentId);
+    this.bookName = bookName;
+    this.quantity = quantity;
+    this.priceBook = priceBook;
     this.paymentMethod = paymentMethod;
   }
 
-  public int calculateDiscount(){
-    int discountAmount = (calculateTotalPrice() * discPerc) / 100;
-    return calculateTotalPrice() - discountAmount;
+  public int calculateTotalPrice() {
+    return quantity * priceBook;
+  }
+
+  public int calculateTotalPrice(int payment1, int payment2) {
+    return payment1 + payment2;
+  }
+
+  public int calculateTotalPrice(int totalBooksPurchasedPrice) {
+    return DiscountUtils.calculateDiscount(totalBooksPurchasedPrice, discPerc);
+  }
+
+  public int calculateGrandTotalPrice() {
+    return 0;
+  }
+
+  public void displayGrandTotal(int totalBooksPurchasedPrice, int grandTotalPrice) {
+    System.out.println("\n----- Grand Total -----");
+    System.out.println("Total Price Before Discount: " + formatCurrency(totalBooksPurchasedPrice));
+    System.out.println("Grand Total Price After Discount: " + formatCurrency(grandTotalPrice));
   }
   
-  public static String formatCurrency(int price) {
-    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-    return currencyFormat.format(price);
-  }
-  
-  public void displayOrderDetails() {
-    super.displayOrderDetails(); 
-    System.out.println("\nPayment Method: " + paymentMethod);
-    System.out.println("Processing payment...");
-    System.out.println("\nDiscount: " + discPerc + "%");
-    System.out.println("Payment Amount: " + formatCurrency(calculateDiscount()));
-    System.out.println("Payment Successful using " + paymentMethod);
+  public void displayPaymentDetails(int no) {
+    int totalPrice = calculateTotalPrice();
+    int finalPrice = DiscountUtils.calculateDiscount(totalPrice, discPerc);
+    super.displayPaymentDetails(no, bookName, quantity, priceBook, totalPrice, paymentMethod, discPerc, finalPrice);
   }
 }

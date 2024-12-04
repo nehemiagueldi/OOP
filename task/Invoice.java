@@ -3,18 +3,30 @@ package task;
 import java.time.LocalDate;
 
 public class Invoice extends PlaceOrder {
-  private LocalDate invoiceDateCreated;
-  private LocalDate invoiceDateExpired;
+  LocalDate invoiceDateCreated;
+  LocalDate invoiceDateExpired;
+  String bookName;
+  int quantity;
+  int priceBook;
+  
+  public Invoice() {
+    super();
+  }
 
-  public Invoice(String customerName, String bookName, int quantity, int priceBook) {
-    super(customerName, bookName, quantity, priceBook);
+  public Invoice(String invoiceId, String bookName, int quantity, int priceBook) {
+    super(invoiceId);
     this.invoiceDateCreated = LocalDate.now();
     this.invoiceDateExpired = invoiceDateCreated.plusDays(1);
+    this.bookName = bookName;
+    this.quantity = quantity;
+    this.priceBook = priceBook;
   }
 
-  public void displayOrderDetails() {
-    super.displayOrderDetails();
-    System.out.println("Invoice Date Created: " + invoiceDateCreated);
-    System.out.println("Invoice Date Expired: " + invoiceDateExpired);
+  public int calculateTotalPrice() {
+    return quantity * priceBook;
   }
+
+  // public void displayInvoiceDetails(int no) {
+  //   super.displayInvoiceDetails(no, bookName, quantity, priceBook, calculateTotalPrice(), invoiceDateCreated, invoiceDateExpired);
+  // }
 }

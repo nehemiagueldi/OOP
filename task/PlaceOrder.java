@@ -1,43 +1,32 @@
 package task;
 
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 
-public class PlaceOrder {
-  private String orderId;
-  private String customerName;
-  private String bookName;
-  private int quantity;
-  private int priceBook;
+public abstract class PlaceOrder {
+  String Id;
 
-  public PlaceOrder(String customerName, String bookName, int quantity, int priceBook) {
-    this.orderId = generateOrderId();
-    this.customerName = customerName;
-    this.bookName = bookName;
-    this.quantity = quantity;
-    this.priceBook = priceBook;
+  public abstract int calculateTotalPrice();
+
+  public PlaceOrder() {
+    super();
   }
 
-  private String generateOrderId() {
-    int randomNumber = 100 + (int)(Math.random() * 900); 
-    return "ORD-" + randomNumber;
-  }
-
-  public int calculateTotalPrice() {
-    return quantity * priceBook;
+  public PlaceOrder(String Id) {
+    this.Id = Id;
   }
   
-  public static String formatCurrency(int price) {
+  public String formatCurrency(int price) {
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     return currencyFormat.format(price);
   }
 
-  public void displayOrderDetails() {
-    System.out.println("\nOrder ID: " + orderId);
-    System.out.println("Customer Name: " + customerName);
-    System.out.println("Book Name: " + bookName);
-    System.out.println("Quantity: " + quantity);
-    System.out.println("Price Book: " + formatCurrency(priceBook));
-    System.out.println("Total Price: " + formatCurrency(calculateTotalPrice()));
+  public void displayInvoiceDetails(int no, String bookName, int quantity, int priceBook, int totalPrice, LocalDate invoiceDateCreated, LocalDate invoiceDateExpired) {
+    System.out.printf("%-4d %-17s %-15s %-12d %-15s %-18s %-15s\n", no, bookName, formatCurrency(priceBook), quantity, formatCurrency(totalPrice), invoiceDateCreated, invoiceDateExpired);
+  }
+
+  public void displayPaymentDetails(int no, String bookName, int quantity, int priceBook, int totalPrice, String paymentMethod, int discPerc, int finalPrice) {
+    System.out.printf("%-4d %-17s %-15s %-12d %-15s %-18s %-15s %-15s\n", no, bookName, formatCurrency(priceBook), quantity, formatCurrency(totalPrice), discPerc + "%", formatCurrency(finalPrice), paymentMethod);
   }
 }

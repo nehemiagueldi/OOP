@@ -88,4 +88,9 @@ public class Book {
   public void displayBooks(int no) {
     System.out.printf("%-4s %-17s %-8s %-15s %-10s\n", no, name, year, formatCurrency(price), stock);
   }
+
+  @Override
+  public String toString() {
+    return "Book [id=" + id + ", name=" + name + ", year=" + year + ", price=" + price + ", stock=" + stock + "]";
+  }
 }

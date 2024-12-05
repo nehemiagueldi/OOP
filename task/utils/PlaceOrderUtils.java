@@ -11,4 +11,9 @@ public class PlaceOrderUtils {
       return "ORD-" + randomNumber;
     }
   }
+
+  public static int generateIdInvoice() {
+    int randomNumber = 100 + (int)(Math.random() * 900);
+    return randomNumber;
+  }
 }

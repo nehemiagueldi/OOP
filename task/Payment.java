@@ -3,7 +3,7 @@ package task;
 import task.interfc.PaymentInterface;
 import task.utils.DiscountUtils;
 
-public class Payment extends PlaceOrder implements PaymentInterface{
+public class Payment extends PlaceOrder<String> implements PaymentInterface{
   String bookName;
   int quantity;
   int priceBook;

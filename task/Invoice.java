@@ -2,7 +2,7 @@ package task;
 
 import java.time.LocalDate;
 
-public class Invoice extends PlaceOrder {
+public class Invoice extends PlaceOrder<Integer> {
   LocalDate invoiceDateCreated;
   LocalDate invoiceDateExpired;
   String bookName;
@@ -13,7 +13,7 @@ public class Invoice extends PlaceOrder {
     super();
   }
 
-  public Invoice(String invoiceId, String bookName, int quantity, int priceBook) {
+  public Invoice(int invoiceId, String bookName, int quantity, int priceBook) {
     super(invoiceId);
     this.invoiceDateCreated = LocalDate.now();
     this.invoiceDateExpired = invoiceDateCreated.plusDays(1);
